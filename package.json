@@ -1,0 +1,39 @@
+{
+  "name": "7.6.-NPM",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:html && npm run test:js",
+    "test:html": "nu-html-checker *.html",
+    "test:js": "jshint js/*.js",
+
+    "build": "npm run build:sass && npm run build:autoprefixer && npm run test",
+    "build:sass": "sass --sourcemap=none --update sass:css",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "prebuild": "rimraf css/*",
+
+    "watch": "parallelshell \"npm run watch:sassprefixer\" \"npm run watch:browsersync\" ",
+    "watch:sassprefixer": "onchange sass/*.scss -- npm run build:sass &&  npm run build:autoprefixer",
+    "watch:browsersync": "node_modules/.bin/browser-sync start --server --files 'css/*.css' '*.html'"},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkudlak/7.6.-NPM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkudlak/7.6.-NPM/issues"
+  },
+  "homepage": "https://github.com/mkudlak/7.6.-NPM#readme",
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "onchange": "^3.2.1",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5",
+    "parallelshell": "^3.0.2"
+  }
+}
